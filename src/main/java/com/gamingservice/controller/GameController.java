@@ -1,7 +1,7 @@
-package com.example.gamingservice.controller;
+package com.gamingservice.controller;
 
-import com.example.gamingservice.model.Game;
-import com.example.gamingservice.repository.GameRepository;
+import com.gamingservice.model.Game;
+import com.gamingservice.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

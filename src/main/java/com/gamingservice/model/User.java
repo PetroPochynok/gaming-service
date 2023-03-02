@@ -1,4 +1,4 @@
-package com.example.gamingservice.model;
+package com.gamingservice.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

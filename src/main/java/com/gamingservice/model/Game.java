@@ -1,4 +1,4 @@
-package com.example.gamingservice.model;
+package com.gamingservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
