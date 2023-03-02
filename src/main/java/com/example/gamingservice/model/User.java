@@ -1,12 +1,16 @@
 package com.example.gamingservice.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
+@EqualsAndHashCode(of = "email")
 @Getter
 @Setter
 @Entity
@@ -37,5 +41,8 @@ public class User {
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private UserProfile userProfile;
+
+    @ManyToMany(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private Set<Game> games = new HashSet<>();
 
 }
