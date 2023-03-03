@@ -1,7 +1,9 @@
 package com.gamingservice.controller;
 
-import com.gamingservice.exception.UserNotFoundException;
+import com.gamingservice.exception.EntityNotFoundException;
+import com.gamingservice.mapper.UserMapper;
 import com.gamingservice.model.User;
+import com.gamingservice.model.dto.UserAndUserProfileDTO;
 import com.gamingservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,21 +27,23 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable("id") Long id) {
         return userService.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(String.format("There is no user with such id: %s", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("There is no user with such id: %s", id)));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveUser(@RequestBody User user) {
+    public void saveUser(@RequestBody UserAndUserProfileDTO dto) {
+        User user = UserMapper.INSTANCE.UserAndUserProfileDtoToUser(dto);
         userService.save(user);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateUser(@PathVariable("id") Long id, @RequestBody User user) {
-        if (!Objects.equals(id, user.getId())) {
+    public void updateUser(@PathVariable("id") Long id, @RequestBody UserAndUserProfileDTO dto) {
+        if (!Objects.equals(id, dto.getId())) {
             throw new IllegalStateException("Id parameter does not match user body value");
         }
+        User user = UserMapper.INSTANCE.UserAndUserProfileDtoToUser(dto);
         userService.save(user);
     }
 

@@ -1,6 +1,6 @@
 package com.gamingservice.controller;
 
-import com.gamingservice.exception.GameNotFoundException;
+import com.gamingservice.exception.EntityNotFoundException;
 import com.gamingservice.model.Game;
 import com.gamingservice.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class GameController {
     @GetMapping("/{id}")
     public Game getGame(@PathVariable("id") Long id) {
         return gameService.findById(id)
-                .orElseThrow(() -> new GameNotFoundException(String.format("There is no game with such id: %s", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("There is no game with such id: %s", id)));
     }
 
     @PostMapping()
