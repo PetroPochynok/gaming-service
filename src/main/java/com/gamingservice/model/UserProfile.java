@@ -25,7 +25,7 @@ public class UserProfile {
     @Column(nullable = false)
     private String street;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @MapsId
     @JoinColumn(name = "user_id")
     @JsonBackReference
