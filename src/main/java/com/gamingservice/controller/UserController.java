@@ -40,11 +40,7 @@ public class UserController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateUser(@PathVariable("id") Long id, @RequestBody UserAndUserProfileDTO dto) {
-        if (!Objects.equals(id, dto.getId())) {
-            throw new IllegalStateException("Id parameter does not match user body value");
-        }
-        User user = UserMapper.INSTANCE.UserAndUserProfileDtoToUser(dto);
-        userService.save(user);
+        userService.update(dto, id);
     }
 
     @DeleteMapping("/{id}")
