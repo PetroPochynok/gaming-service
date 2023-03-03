@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void update(UserAndUserProfileDTO dto, Long id) {
+    public User update(UserAndUserProfileDTO dto, Long id) {
         User user = userRepository.findByIdFetchUserProfile(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("There is no user with such id: %s", id)));
 
@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
         userProfile.setCountry(dto.getCountry());
         userProfile.setCity(dto.getCity());
         userProfile.setStreet(dto.getStreet());
+        return user;
     }
 
     @Override
@@ -73,6 +74,5 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findByIdFetchUserProfile(Long id) {
         return userRepository.findByIdFetchUserProfile(id);
     }
-
 
 }

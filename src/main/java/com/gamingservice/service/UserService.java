@@ -16,7 +16,7 @@ public interface UserService {
 
     void save(User user);
 
-    void update(UserAndUserProfileDTO dto, Long id);
+    User update(UserAndUserProfileDTO dto, Long id);
 
 
     List<User> findAllFetchUserProfileAndGames();

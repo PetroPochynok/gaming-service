@@ -5,6 +5,7 @@ import com.gamingservice.model.Game;
 import com.gamingservice.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,23 +30,34 @@ public class GameController {
     }
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
-    public void saveGame(@RequestBody Game game) {
+    public ResponseEntity<Game> saveGame(@RequestBody Game game) {
         gameService.save(game);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(game);
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGame(@PathVariable("id") Long id, @RequestBody Game game) {
+    public ResponseEntity<Game> updateGame(@PathVariable("id") Long id, @RequestBody Game game) {
         if (!Objects.equals(id, game.getId())) {
             throw new IllegalStateException("Id parameter does not match game body value");
         }
-        gameService.save(game);
+        Game updatedGame = gameService.save(game);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(updatedGame);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGame(@PathVariable("id") Long id) {
+    public ResponseEntity<Game> deleteGame(@PathVariable("id") Long id) {
+        Game game = gameService.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("There is no game with such id: %s", id)));
+
         gameService.remove(id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(game);
     }
 }
