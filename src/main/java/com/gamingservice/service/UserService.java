@@ -17,4 +17,11 @@ public interface UserService {
     void save(User user);
 
     void update(UserAndUserProfileDTO dto, Long id);
+
+
+    List<User> findAllFetchUserProfileAndGames();
+
+    Optional<User> findByIdFetchUserProfileAndGames(Long id);
+
+    Optional<User> findByIdFetchUserProfile(Long id);
 }

@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
@@ -21,12 +20,12 @@ public class UserController {
 
     @GetMapping
     public List<User> getUsers() {
-        return userService.findAll();
+        return userService.findAllFetchUserProfileAndGames();
     }
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable("id") Long id) {
-        return userService.findById(id)
+        return userService.findByIdFetchUserProfileAndGames(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("There is no user with such id: %s", id)));
     }
 

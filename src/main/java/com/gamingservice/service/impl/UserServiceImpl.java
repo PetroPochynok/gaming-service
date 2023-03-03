@@ -39,10 +39,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+
     @Override
     @Transactional
     public void update(UserAndUserProfileDTO dto, Long id) {
-        User user = userRepository.findById(id)
+        User user = userRepository.findByIdFetchUserProfile(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("There is no user with such id: %s", id)));
 
         // we don't allow to change our email because our equalsAndHashCode based on this field
@@ -56,6 +57,21 @@ public class UserServiceImpl implements UserService {
         userProfile.setCountry(dto.getCountry());
         userProfile.setCity(dto.getCity());
         userProfile.setStreet(dto.getStreet());
+    }
+
+    @Override
+    public List<User> findAllFetchUserProfileAndGames() {
+        return userRepository.findAllFetchUserProfileAndGames();
+    }
+
+    @Override
+    public Optional<User> findByIdFetchUserProfileAndGames(Long id) {
+        return userRepository.findByIdFetchUserProfileAndGames(id);
+    }
+
+    @Override
+    public Optional<User> findByIdFetchUserProfile(Long id) {
+        return userRepository.findByIdFetchUserProfile(id);
     }
 
 
