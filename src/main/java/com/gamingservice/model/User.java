@@ -45,4 +45,14 @@ public class User {
     @ManyToMany(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Set<Game> games = new HashSet<>();
 
+    public void addGame(Game game) {
+        games.add(game);
+        game.getUsers().add(this);
+    }
+
+    public void removeGame(Game game) {
+        games.remove(game);
+        game.getUsers().remove(this);
+    }
+
 }
