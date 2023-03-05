@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User update(UserAndUserProfileDTO dto, Long id) {
-        User user = userRepository.findByIdFetchUserProfile(id)
+        User user = userRepository.findByIdFetchUserProfileAndGames(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("There is no user with such id: %s", id)));
 
         // we don't allow to change our email because our equalsAndHashCode based on this field
@@ -71,8 +72,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByIdFetchUserProfile(Long id) {
-        return userRepository.findByIdFetchUserProfile(id);
+    public User findTheRichestUser() {
+        return userRepository.findTheRichestUser();
+    }
+
+    @Override
+    public List<User> findUserByCountry(String country) {
+        return userRepository.findUsersByCountry(country);
+    }
+
+    @Override
+    public Map<String, List<User>> splitAllUsersByEmailDomain() {
+        return userRepository.splitAllUsersByEmailDomain();
+    }
+
+    @Override
+    public User findUserWithTheMostAmountOfGames() {
+        return userRepository.findUserWithTheMostAmountOfGames();
     }
 
 }

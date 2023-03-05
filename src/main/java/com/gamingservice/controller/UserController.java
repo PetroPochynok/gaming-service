@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -19,6 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // CRUD operations
     @GetMapping
     public List<User> getUsers() {
         return userService.findAllFetchUserProfileAndGames();
@@ -57,5 +59,31 @@ public class UserController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(user);
+    }
+
+
+    // Business logic
+    @GetMapping("/richestUser")
+    public User getTheRichestUser() {
+        return userService.findTheRichestUser();
+    }
+
+    @GetMapping("/country")
+    public List<User> findUsersByCountry(@RequestParam("country") String country) {
+        List<User> list = userService.findUserByCountry(country);
+        if (!list.isEmpty()) {
+            return list;
+        }
+        throw new EntityNotFoundException(String.format("there is no users with country: %s", country));
+    }
+
+    @GetMapping("/splitByEmailDomain")
+    public Map<String, List<User>> splitAllUsersByEmailDomain() {
+        return userService.splitAllUsersByEmailDomain();
+    }
+
+    @GetMapping("/mostAmountOfGames")
+    public User findUserWithTheMostAmountOfGames() {
+        return userService.findUserWithTheMostAmountOfGames();
     }
 }

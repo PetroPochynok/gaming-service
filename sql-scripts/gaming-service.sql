@@ -50,9 +50,9 @@ CREATE TABLE IF NOT EXISTS user_game
 #
 
 INSERT INTO user (id, first_name, last_name, email, balance, gender, created_at)
-VALUES (1, 'Rick', 'Novak', 'rick.novak@gmail.com', 0.00, 'MALE', now()),
+VALUES (1, 'Rick', 'Novak', 'rick.novak@yahoo.com', 0.00, 'MALE', now()),
        (2, 'Olivia', 'Clark', 'olivia.clark@gmail.com', 500.00, 'FEMALE', now()),
-       (3, 'Noah', 'Smith', 'noah.smith@gmail.com', 0.00, 'MALE', now()),
+       (3, 'Noah', 'Smith', 'noah.smith@hotmail.com', 0.00, 'MALE', now()),
        (4, 'Charlotte', 'Williams', 'charlotte.williams@gmail.com', 2300.25, 'FEMALE', now());
 
 INSERT INTO user_profile (user_id, country, city, street)
@@ -70,5 +70,5 @@ VALUES (1, 'Counter-Strike: Global Offensive', '2012-08-12', 'Tactical First-Per
        (5, 'Hogwarts Legacy', '2023-02-10', 'RPG', 1150.00);
 
 INSERT INTO user_game(user_id, game_id)
-VALUES (2, 5), (4, 1);
+VALUES (2, 5), (2, 3),(4, 1);
 
