@@ -22,6 +22,11 @@ public class ExceptionController {
         return createResponseEntity(illegalStateException, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException illegalArgumentException) {
+        return createResponseEntity(illegalArgumentException, HttpStatus.BAD_REQUEST);
+    }
+
     private ResponseEntity<ErrorResponse> createResponseEntity(RuntimeException exc, HttpStatus httpStatus) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatus(httpStatus.value());
