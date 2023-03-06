@@ -39,6 +39,7 @@ public class CustomGameRepositoryImpl implements CustomGameRepository {
                 .getResultList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Game findLastReleasedGame() {
         return entityManager.createQuery("select g from Game g left join fetch g.users order by g.releaseDate desc", Game.class)
@@ -46,6 +47,7 @@ public class CustomGameRepositoryImpl implements CustomGameRepository {
                 .getSingleResult();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Map<String, List<Game>> splitAllGamesByGenre() {
         return entityManager.createQuery("select g from Game g left join fetch g.users", Game.class)
