@@ -4,6 +4,7 @@ import com.gamingservice.model.Game;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface GameService {
@@ -25,4 +26,6 @@ public interface GameService {
     List<Game> findByPriceRange(BigDecimal min, BigDecimal max);
 
     Game findLastReleasedGame();
+
+    Map<String, List<Game>> splitAllGamesByGenre();
 }

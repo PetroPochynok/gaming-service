@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -87,5 +88,10 @@ public class GameController {
     @GetMapping("/lastReleasedGame")
     public Game findLastReleasedGame() {
         return gameService.findLastReleasedGame();
+    }
+
+    @GetMapping("/splitByGenre")
+    public Map<String, List<Game>> splitAllGamesByGenre() {
+        return gameService.splitAllGamesByGenre();
     }
 }

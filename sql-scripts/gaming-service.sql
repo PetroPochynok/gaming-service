@@ -63,7 +63,7 @@ VALUES (1, 'Canada', 'Toronto', 'Milmink Street'),
 
 
 INSERT INTO game(id, name, release_date, genre, price)
-VALUES (1, 'Counter-Strike: Global Offensive', '2012-08-12', 'Tactical First-Person Shooter', 350.00),
+VALUES (1, 'Counter-Strike: Global Offensive', '2012-08-12', 'Shooter', 350.00),
        (2, 'Dota 2', '2013-07-09', 'MOBA', 0.00),
        (3, 'Apex Legends', '2019-02-04', 'Battle Royale', 0.00),
        (4, 'PUBG: BATTLEGROUNDS', '2017-03-23', 'Battle Royale', 720.00),

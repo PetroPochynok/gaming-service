@@ -8,6 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.*;
 
 @Repository
 @Transactional
@@ -41,5 +44,13 @@ public class CustomGameRepositoryImpl implements CustomGameRepository {
         return entityManager.createQuery("select g from Game g left join fetch g.users order by g.releaseDate desc", Game.class)
                 .setMaxResults(1)
                 .getSingleResult();
+    }
+
+    @Override
+    public Map<String, List<Game>> splitAllGamesByGenre() {
+        return entityManager.createQuery("select g from Game g left join fetch g.users", Game.class)
+                .getResultList()
+                .stream()
+                .collect(groupingBy(Game::getGenre));
     }
 }
