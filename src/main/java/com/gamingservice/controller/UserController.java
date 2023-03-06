@@ -94,4 +94,9 @@ public class UserController {
     public List<User> findUsersByBalanceRange(@RequestParam("min") BigDecimal min, BigDecimal max) {
         return userService.findByBalanceRange(min, max);
     }
+
+    @GetMapping("/splitByGender")
+    public Map<String, List<User>> splitAllUsersByGender() {
+        return userService.splitAllUsersByGender();
+    }
 }

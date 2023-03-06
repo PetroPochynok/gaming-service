@@ -110,4 +110,9 @@ public class UserServiceImpl implements UserService {
         throw new EntityNotFoundException(String.format("Can't find users between %.2f and %.2f balance range", min, max));
     }
 
+    @Override
+    public Map<String, List<User>> splitAllUsersByGender() {
+        return userRepository.splitAllUsersByGender();
+    }
+
 }

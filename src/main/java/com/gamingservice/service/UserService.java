@@ -36,4 +36,6 @@ public interface UserService {
     Map<String, List<User>> splitAllUsersByCountry();
 
     List<User> findByBalanceRange(BigDecimal min, BigDecimal max);
+
+    Map<String, List<User>> splitAllUsersByGender();
 }

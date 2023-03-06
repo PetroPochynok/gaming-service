@@ -67,6 +67,7 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findByBalanceRange(BigDecimal min, BigDecimal max) {
         if (min.compareTo(max) > 0) {
             throw new IllegalArgumentException("value min can not be higher than value max");
@@ -76,5 +77,15 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
                 .setParameter("min", min)
                 .setParameter("max", max)
                 .getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Map<String, List<User>> splitAllUsersByGender() {
+        return entityManager
+                .createQuery("select DISTINCT u from User u join fetch u.userProfile left join fetch u.games", User.class)
+                .getResultList()
+                .stream()
+                .collect(groupingBy(User::getGender));
     }
 }
