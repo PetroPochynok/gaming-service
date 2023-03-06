@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
+    // CRUD operations
     @GetMapping
     public List<Game> getGames() {
         return gameService.findAll();
@@ -59,5 +61,26 @@ public class GameController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(game);
+    }
+
+    // Business logic
+    @GetMapping("/mostExpensiveGame")
+    public Game getTheMostExpensiveGame() {
+        return gameService.findTheMostExpensiveGame();
+    }
+
+    @GetMapping("/genre")
+    public List<Game> findAllGamesByGenre(@RequestParam("genre") String genre) {
+        return gameService.findAllGamesByGenre(genre);
+    }
+
+    @GetMapping("/name")
+    public Game findGameByName(@RequestParam("name") String name) {
+        return gameService.findGameByName(name);
+    }
+
+    @GetMapping("/findByPriceRange")
+    public List<Game> findGamesByPriceRange(@RequestParam("min") BigDecimal min, @RequestParam("max") BigDecimal max) {
+        return gameService.findByPriceRange(min, max);
     }
 }
