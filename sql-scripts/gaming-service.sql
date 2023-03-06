@@ -53,22 +53,74 @@ INSERT INTO user (id, first_name, last_name, email, balance, gender, created_at)
 VALUES (1, 'Rick', 'Novak', 'rick.novak@yahoo.com', 0.00, 'MALE', now()),
        (2, 'Olivia', 'Clark', 'olivia.clark@gmail.com', 500.00, 'FEMALE', now()),
        (3, 'Noah', 'Smith', 'noah.smith@hotmail.com', 0.00, 'MALE', now()),
-       (4, 'Charlotte', 'Williams', 'charlotte.williams@gmail.com', 2300.25, 'FEMALE', now());
+       (4, 'Charlotte', 'Williams', 'charlotte.williams@gmail.com', 2300.25, 'FEMALE', now()),
+       (5, 'Bob', 'Jhonson', 'bob.jhonson@gmail.com', 52.64, 'MALE', now()),
+       (6, 'Sophia', 'Lopez', 'sophia.lopez@outlook.com', 100.50, 'FEMALE', now()),
+       (7, 'Lucas', 'Moore', 'lucas.moore@outlook.com', 23250.00, 'MALE', now()),
+       (8, 'James', 'Wilson', 'james.wilson@outlook.com', 13400.15, 'MALE', now()),
+       (9, 'Henry', 'King', 'henry.king@outlook.com', 1700.00, 'MALE', now()),
+       (10, 'Lucas', 'Novak', 'lucas.novak@yahoo.com', 3400.60, 'MALE', now()),
+       (11, 'Bob', 'Lopez', 'bob.lopez@iCloud.com', 0.00, 'MALE', now()),
+       (12, 'James', 'Williams', 'james.williams@iCloud.com', 4200.13, 'MALE', now()),
+       (13, 'Rick', 'Clark', 'rick.clark@iCloud.com', 75.00, 'MALE', now()),
+       (14, 'Sophia', 'Moore', 'sophia.moore@iCloud.com', 3125.50, 'FEMALE', now()),
+       (15, 'Noah', 'Williams', 'noah.williams@iCloud.com', 2100.00, 'MALE', now()),
+       (16, 'Zakhar', 'Pavlenko', 'zakhar.pavlenko@yandex.ua', 1255.00, 'MALE', now()),
+       (17, 'Yevheniia', 'Boyko', 'yevheniia.boyko@gmail.com', 0.00, 'FEMALE', now()),
+       (18, 'Zhanna', 'Tkachenko', 'zhanna.tkachenko@yandex.ua', 5892.50, 'FEMALE', now()),
+       (19, 'Dmitry ', 'Kovalchuk', 'dmitry.kovalchuk@gmail.com', 12750.00, 'MALE', now()),
+       (20, 'Halyna', 'Havrylyuk', 'halyna.havrylyuk@yandex.ua', 7570.55, 'FEMALE', now());
+
 
 INSERT INTO user_profile (user_id, country, city, street)
 VALUES (1, 'Canada', 'Toronto', 'Milmink Street'),
        (2, 'Australia', 'Perth', 'Brisbane Terrace'),
        (3, 'Ireland', 'Dublin', 'Henrietta Street'),
-       (4, 'Italy', 'Milan', 'Via Dante');
+       (4, 'Italy', 'Milan', 'Via Dante'),
+       (5, 'Norway', 'Stavanger', 'Baneveien'),
+       (6, 'Finland', 'Helsinki', 'Esplanadi'),
+       (7, 'Sweden', 'Stockholm', 'Svartensgatan'),
+       (8, 'Iceland', 'Akureyri', 'Valagil'),
+       (9, 'Switzerland', 'Bern', 'Blockweg'),
+       (10, 'Canada', 'Toronto', 'Milmink Street'),
+       (11, 'Australia', 'Sydney', 'King Street'),
+       (12, 'Italy', 'Rome', 'Via del Corso'),
+       (13, 'Finland', 'Espoo', 'Aamutie'),
+       (14, 'Canada', 'Montreal', 'Sainte-Catherine Street'),
+       (15, 'Norway', 'Trondheim', 'Bakkegata'),
+       (16, 'Ukraine', 'Mykolaiv', 'Kotelna Street'),
+       (17, 'Ukraine', 'Odesa', 'Shishkina 1 Per'),
+       (18, 'Ukraine', 'Lviv', 'Staroyevryeiska Street'),
+       (19, 'Ukraine', 'Kiev', 'Ivana Franka Street'),
+       (20, 'Ukraine', 'Vinnytsia', 'Sverdlova street');
 
 
 INSERT INTO game(id, name, release_date, genre, price)
 VALUES (1, 'Counter-Strike: Global Offensive', '2012-08-12', 'Shooter', 350.00),
        (2, 'Dota 2', '2013-07-09', 'MOBA', 0.00),
        (3, 'Apex Legends', '2019-02-04', 'Battle Royale', 0.00),
-       (4, 'PUBG: BATTLEGROUNDS', '2017-03-23', 'Battle Royale', 720.00),
-       (5, 'Hogwarts Legacy', '2023-02-10', 'RPG', 1150.00);
+       (4, 'PUBG: BATTLEGROUNDS', '2017-03-23', 'Battle Royale', 720.50),
+       (5, 'Grand Theft Auto V', '2013-09-17', 'Action-adventure', 1105.00),
+       (6, 'Rust', '2013-12-11', 'Survival', 1475.00),
+       (7, 'Sons Of The Forest', '2023-02-23', 'Survival', 1150.25),
+       (8, 'Rocket League', '2015-07-07', 'Sport', 0.00),
+       (9, 'ELDEN RING', '2022-02-25', 'RPG', 2250.99),
+       (10, 'Football Manager 2023', '2022-11-08', 'Sport', 2150.00),
+       (11, 'FIFA 23', '2022-09-27', 'Sport', 2585.45),
+       (12, 'Left 4 Dead 2', '2009-11-17', 'Shooter', 370.50),
+       (13, 'PAYDAY 2', '2013-08-13', 'Shooter', 350.00),
+       (14, 'Terraria', '2011-05-16', 'Action-adventure', 335.99),
+       (15, 'Crab Game', '2021-10-29', 'Battle Royale', 0.00);
 
 INSERT INTO user_game(user_id, game_id)
-VALUES (2, 5), (2, 3),(4, 1);
+VALUES (1, 2), (1, 3),
+       (3, 9), (3, 6), (3, 7),
+       (6, 14),
+       (7, 1), (7, 15), (7, 9), (7, 7), (7, 6), (7, 11),
+       (8, 10), (8, 11), (8, 8), (8, 12),
+       (12, 15), (12, 4),
+       (13, 5), (13, 10),
+       (17, 15), (17, 8), (17, 10),
+       (20, 11), (20, 10);
+
 
