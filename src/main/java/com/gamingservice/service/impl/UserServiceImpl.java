@@ -77,8 +77,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUserByCountry(String country) {
-        return userRepository.findUsersByCountry(country);
+    public List<User> findUsersByCountry(String country) {
+        List<User> list = userRepository.findUsersByCountry(country);
+        if (!list.isEmpty()) {
+            return list;
+        }
+        throw new EntityNotFoundException(String.format("there are no users with country: %s", country));
     }
 
     @Override

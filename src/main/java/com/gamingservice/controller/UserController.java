@@ -70,11 +70,8 @@ public class UserController {
 
     @GetMapping("/country")
     public List<User> findUsersByCountry(@RequestParam("country") String country) {
-        List<User> list = userService.findUserByCountry(country);
-        if (!list.isEmpty()) {
-            return list;
-        }
-        throw new EntityNotFoundException(String.format("there are no users with country: %s", country));
+       return userService.findUsersByCountry(country);
+
     }
 
     @GetMapping("/splitByEmailDomain")

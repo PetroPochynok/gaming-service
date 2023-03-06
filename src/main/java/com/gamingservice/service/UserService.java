@@ -26,7 +26,7 @@ public interface UserService {
 
     User findTheRichestUser();
 
-    List<User> findUserByCountry(String country);
+    List<User> findUsersByCountry(String country);
 
     Map<String, List<User>> splitAllUsersByEmailDomain();
 
