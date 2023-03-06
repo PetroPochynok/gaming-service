@@ -64,7 +64,7 @@ public class GameServiceImpl implements GameService {
         if (!list.isEmpty()) {
             return list;
         }
-        throw new EntityNotFoundException(String.format("Can't find games between %.2f and %.2f range", min, max));
+        throw new EntityNotFoundException(String.format("Can't find games between %.2f and %.2f price range", min, max));
     }
 
     @Override

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -63,5 +64,17 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
                 .getResultList()
                 .stream()
                 .collect(groupingBy(acc -> acc.getUserProfile().getCountry()));
+    }
+
+    @Override
+    public List<User> findByBalanceRange(BigDecimal min, BigDecimal max) {
+        if (min.compareTo(max) > 0) {
+            throw new IllegalArgumentException("value min can not be higher than value max");
+        }
+        return entityManager
+                .createQuery("select DISTINCT u from User u join fetch u.userProfile left join fetch u.games where u.balance >= :min and u.balance <= :max", User.class)
+                .setParameter("min", min)
+                .setParameter("max", max)
+                .getResultList();
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +71,7 @@ public class UserController {
 
     @GetMapping("/country")
     public List<User> findUsersByCountry(@RequestParam("country") String country) {
-       return userService.findUsersByCountry(country);
+        return userService.findUsersByCountry(country);
 
     }
 
@@ -87,5 +88,10 @@ public class UserController {
     @GetMapping("/splitByCountry")
     public Map<String, List<User>> splitAllUsersByCountry() {
         return userService.splitAllUsersByCountry();
+    }
+
+    @GetMapping("/findByBalanceRange")
+    public List<User> findUsersByBalanceRange(@RequestParam("min") BigDecimal min, BigDecimal max) {
+        return userService.findByBalanceRange(min, max);
     }
 }

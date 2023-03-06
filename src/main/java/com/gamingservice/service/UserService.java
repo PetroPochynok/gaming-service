@@ -3,6 +3,7 @@ package com.gamingservice.service;
 import com.gamingservice.model.User;
 import com.gamingservice.model.dto.UserAndUserProfileDTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,4 +34,6 @@ public interface UserService {
     User findUserWithTheMostAmountOfGames();
 
     Map<String, List<User>> splitAllUsersByCountry();
+
+    List<User> findByBalanceRange(BigDecimal min, BigDecimal max);
 }

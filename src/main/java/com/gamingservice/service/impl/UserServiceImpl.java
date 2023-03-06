@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -98,6 +99,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, List<User>> splitAllUsersByCountry() {
         return userRepository.splitAllUsersByCountry();
+    }
+
+    @Override
+    public List<User> findByBalanceRange(BigDecimal min, BigDecimal max) {
+        List<User> list = userRepository.findByBalanceRange(min, max);
+        if (!list.isEmpty()) {
+            return list;
+        }
+        throw new EntityNotFoundException(String.format("Can't find users between %.2f and %.2f balance range", min, max));
     }
 
 }
