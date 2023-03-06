@@ -1,9 +1,12 @@
 package com.gamingservice.service.impl;
 
 import com.gamingservice.exception.EntityNotFoundException;
+import com.gamingservice.exception.NotEnoughMoneyException;
+import com.gamingservice.model.Game;
 import com.gamingservice.model.User;
 import com.gamingservice.model.UserProfile;
 import com.gamingservice.model.dto.UserAndUserProfileDTO;
+import com.gamingservice.repository.GameRepository;
 import com.gamingservice.repository.UserRepository;
 import com.gamingservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private GameRepository gameRepository;
 
     @Override
     public List<User> findAll() {
@@ -113,6 +119,31 @@ public class UserServiceImpl implements UserService {
     @Override
     public Map<String, List<User>> splitAllUsersByGender() {
         return userRepository.splitAllUsersByGender();
+    }
+
+    @Override
+    @Transactional
+    public User buyGame(Long userId, Long gameId) {
+        User user = userRepository.findByIdFetchUserProfileAndGames(userId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("There is no user with id: %s", userId)));
+
+        Game game = gameRepository.findById(gameId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("There is no game with id: %s", gameId)));
+
+        if (user.getGames().contains(game)) {
+            throw new IllegalArgumentException(String.format("user with id %s already has game with id %s", userId, gameId));
+        }
+
+        BigDecimal userBalance = user.getBalance();
+        BigDecimal gamePrice = game.getPrice();
+
+        if(userBalance.compareTo(gamePrice) < 0) {
+            throw new NotEnoughMoneyException(String.format("user with id %s has only %.2f when game price is %.2f", userId, userBalance, gamePrice));
+        }
+
+        user.addGame(game);
+        user.setBalance(userBalance.subtract(gamePrice));
+        return user;
     }
 
 }

@@ -38,4 +38,6 @@ public interface UserService {
     List<User> findByBalanceRange(BigDecimal min, BigDecimal max);
 
     Map<String, List<User>> splitAllUsersByGender();
+
+    User buyGame(Long userId, Long gameId);
 }

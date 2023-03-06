@@ -2,6 +2,7 @@ package com.gamingservice.controller;
 
 import com.gamingservice.exception.EntityNotFoundException;
 import com.gamingservice.exception.ErrorResponse;
+import com.gamingservice.exception.NotEnoughMoneyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,6 +26,11 @@ public class ExceptionController {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException illegalArgumentException) {
         return createResponseEntity(illegalArgumentException, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotEnoughMoneyException.class)
+    public ResponseEntity<ErrorResponse> handleNotEnoughMoneyException(NotEnoughMoneyException notEnoughMoneyException) {
+        return createResponseEntity(notEnoughMoneyException, HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<ErrorResponse> createResponseEntity(RuntimeException exc, HttpStatus httpStatus) {

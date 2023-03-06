@@ -99,4 +99,10 @@ public class UserController {
     public Map<String, List<User>> splitAllUsersByGender() {
         return userService.splitAllUsersByGender();
     }
+
+    @GetMapping("/buyGame")
+    @ResponseStatus(HttpStatus.OK)
+    public User buyGame(@RequestParam("userId") Long userId, @RequestParam("gameId") Long gameId) {
+        return userService.buyGame(userId, gameId);
+    }
 }
