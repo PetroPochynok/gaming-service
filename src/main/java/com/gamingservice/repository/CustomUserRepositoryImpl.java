@@ -33,7 +33,7 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     @Override
     public List<User> findUsersByCountry(String country) {
         TypedQuery<User> query = entityManager
-                .createQuery("select u from User u join fetch u.userProfile left join fetch u.games where u.userProfile.country=:country", User.class);
+                .createQuery("select DISTINCT u from User u join fetch u.userProfile left join fetch u.games where u.userProfile.country=:country", User.class);
         query.setParameter("country", country);
         return query.getResultList();
     }
@@ -41,7 +41,7 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     @Transactional(readOnly = true)
     @Override
     public Map<String, List<User>> splitAllUsersByEmailDomain() {
-        List<User> list = entityManager.createQuery("select u from User u join fetch u.userProfile left join fetch u.games", User.class).getResultList();
+        List<User> list = entityManager.createQuery("select DISTINCT u from User u join fetch u.userProfile left join fetch u.games", User.class).getResultList();
         return list.stream()
                 .collect(groupingBy(u -> u.getEmail().split("@")[1]));
     }
@@ -59,7 +59,7 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
     @Override
     @Transactional(readOnly = true)
     public Map<String, List<User>> splitAllUsersByCountry() {
-        return entityManager.createQuery("select u from User u join fetch u.userProfile left join fetch u.games", User.class)
+        return entityManager.createQuery("select DISTINCT u from User u join fetch u.userProfile left join fetch u.games", User.class)
                 .getResultList()
                 .stream()
                 .collect(groupingBy(acc -> acc.getUserProfile().getCountry()));

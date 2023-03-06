@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>, CustomUserRepository {
 
-    @Query("select u from User u join fetch u.userProfile left join fetch u.games")
+    @Query("select DISTINCT u from User u join fetch u.userProfile left join fetch u.games")
     @Transactional(readOnly = true)
     List<User> findAllFetchUserProfileAndGames();
 
