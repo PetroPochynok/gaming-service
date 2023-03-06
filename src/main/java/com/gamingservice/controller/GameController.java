@@ -83,4 +83,9 @@ public class GameController {
     public List<Game> findGamesByPriceRange(@RequestParam("min") BigDecimal min, @RequestParam("max") BigDecimal max) {
         return gameService.findByPriceRange(min, max);
     }
+
+    @GetMapping("/lastReleasedGame")
+    public Game findLastReleasedGame() {
+        return gameService.findLastReleasedGame();
+    }
 }

@@ -65,4 +65,9 @@ public class GameServiceImpl implements GameService {
         }
         throw new EntityNotFoundException(String.format("Can't find games between %.2f and %.2f range", min, max));
     }
+
+    @Override
+    public Game findLastReleasedGame() {
+        return gameRepository.findLastReleasedGame();
+    }
 }

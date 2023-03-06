@@ -32,4 +32,11 @@ public class CustomGameRepositoryImpl implements CustomGameRepository {
                 .setParameter("max", max)
                 .getResultList();
     }
+
+    @Override
+    public Game findLastReleasedGame() {
+        return entityManager.createQuery("select g from Game g left join fetch g.users order by g.releaseDate desc", Game.class)
+                .setMaxResults(1)
+                .getSingleResult();
+    }
 }

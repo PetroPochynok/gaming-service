@@ -23,4 +23,6 @@ public interface GameService {
     Game findGameByName(String name);
 
     List<Game> findByPriceRange(BigDecimal min, BigDecimal max);
+
+    Game findLastReleasedGame();
 }

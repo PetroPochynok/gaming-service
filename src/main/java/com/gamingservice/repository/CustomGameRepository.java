@@ -10,4 +10,6 @@ public interface CustomGameRepository {
     Game findTheMostExpensiveGame();
 
     List<Game> findByPriceRange(BigDecimal min, BigDecimal max);
+
+    Game findLastReleasedGame();
 }
