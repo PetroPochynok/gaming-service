@@ -13,4 +13,6 @@ public interface CustomUserRepository {
     Map<String, List<User>> splitAllUsersByEmailDomain();
 
     User findUserWithTheMostAmountOfGames();
+
+    Map<String, List<User>> splitAllUsersByCountry();
 }

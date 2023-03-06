@@ -31,4 +31,6 @@ public interface UserService {
     Map<String, List<User>> splitAllUsersByEmailDomain();
 
     User findUserWithTheMostAmountOfGames();
+
+    Map<String, List<User>> splitAllUsersByCountry();
 }

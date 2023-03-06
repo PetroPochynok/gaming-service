@@ -95,4 +95,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUserWithTheMostAmountOfGames();
     }
 
+    @Override
+    public Map<String, List<User>> splitAllUsersByCountry() {
+        return userRepository.splitAllUsersByCountry();
+    }
+
 }

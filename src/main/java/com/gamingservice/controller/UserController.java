@@ -83,4 +83,9 @@ public class UserController {
     public User findUserWithTheMostAmountOfGames() {
         return userService.findUserWithTheMostAmountOfGames();
     }
+
+    @GetMapping("/splitByCountry")
+    public Map<String, List<User>> splitAllUsersByCountry() {
+        return userService.splitAllUsersByCountry();
+    }
 }

@@ -55,4 +55,13 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
                 .max(Comparator.comparing(u -> u.getGames().size()))
                 .orElseThrow(() -> new EntityNotFoundException("can't find user with the most amount of games"));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Map<String, List<User>> splitAllUsersByCountry() {
+        return entityManager.createQuery("select u from User u join fetch u.userProfile left join fetch u.games", User.class)
+                .getResultList()
+                .stream()
+                .collect(groupingBy(acc -> acc.getUserProfile().getCountry()));
+    }
 }
