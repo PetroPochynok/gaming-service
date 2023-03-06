@@ -74,7 +74,7 @@ public class UserController {
         if (!list.isEmpty()) {
             return list;
         }
-        throw new EntityNotFoundException(String.format("there is no users with country: %s", country));
+        throw new EntityNotFoundException(String.format("there are no users with country: %s", country));
     }
 
     @GetMapping("/splitByEmailDomain")
