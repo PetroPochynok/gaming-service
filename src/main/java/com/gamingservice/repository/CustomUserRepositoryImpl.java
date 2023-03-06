@@ -73,7 +73,7 @@ public class CustomUserRepositoryImpl implements CustomUserRepository {
             throw new IllegalArgumentException("value min can not be higher than value max");
         }
         return entityManager
-                .createQuery("select DISTINCT u from User u join fetch u.userProfile left join fetch u.games where u.balance >= :min and u.balance <= :max", User.class)
+                .createQuery("select DISTINCT u from User u join fetch u.userProfile left join fetch u.games where u.balance >= :min and u.balance <= :max order by u.balance asc", User.class)
                 .setParameter("min", min)
                 .setParameter("max", max)
                 .getResultList();
