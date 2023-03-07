@@ -33,7 +33,7 @@ public class CustomGameRepositoryImpl implements CustomGameRepository {
         if (min.compareTo(max) > 0) {
             throw new IllegalArgumentException("value min can not be higher than value max");
         }
-        return entityManager.createQuery("select g from Game g left join fetch g.users where g.price >= :min AND g.price <= :max", Game.class)
+        return entityManager.createQuery("select DISTINCT g from Game g left join fetch g.users where g.price >= :min AND g.price <= :max", Game.class)
                 .setParameter("min", min)
                 .setParameter("max", max)
                 .getResultList();
