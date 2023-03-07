@@ -45,6 +45,20 @@ CREATE TABLE IF NOT EXISTS user_game
     CONSTRAINT `FK_user_game_id` FOREIGN KEY (game_id) REFERENCES game (id)
 );
 
+CREATE TABLE IF NOT EXISTS feedback
+(
+    id      BIGINT AUTO_INCREMENT,
+    message VARCHAR(255) NOT NULL,
+    rating  INT          NOT NULL,
+    game_id BIGINT       NOT NULL,
+    user_id BIGINT       NOT NULL,
+    CONSTRAINT `PK_feedback` PRIMARY KEY (id),
+    CONSTRAINT `CHK_feedback_rating` CHECK (rating >= 0 AND rating <= 5),
+    CONSTRAINT `FK_feedback_user_id` FOREIGN KEY (user_id) REFERENCES user (id),
+    CONSTRAINT `FK_feedback_game_id` FOREIGN KEY (game_id) REFERENCES game (id)
+);
+
+
 #
 ## POPULATE SOME DATA
 #
@@ -113,14 +127,45 @@ VALUES (1, 'Counter-Strike: Global Offensive', '2012-08-12', 'Shooter', 350.00),
        (15, 'Crab Game', '2021-10-29', 'Battle Royale', 0.00);
 
 INSERT INTO user_game(user_id, game_id)
-VALUES (1, 2), (1, 3),
-       (3, 9), (3, 6), (3, 7),
+VALUES (1, 2),
+       (1, 3),
+       (3, 9),
+       (3, 6),
+       (3, 7),
        (6, 14),
-       (7, 1), (7, 15), (7, 9), (7, 7), (7, 6), (7, 11),
-       (8, 10), (8, 11), (8, 8), (8, 12),
-       (12, 15), (12, 4),
-       (13, 5), (13, 10),
-       (17, 15), (17, 8), (17, 10),
-       (20, 11), (20, 10);
+       (7, 1),
+       (7, 15),
+       (7, 9),
+       (7, 7),
+       (7, 6),
+       (7, 11),
+       (8, 10),
+       (8, 11),
+       (8, 8),
+       (8, 12),
+       (12, 15),
+       (12, 4),
+       (13, 5),
+       (13, 10),
+       (17, 15),
+       (17, 8),
+       (17, 10),
+       (20, 11),
+       (20, 10);
+
+INSERT INTO feedback(id, message, rating, game_id, user_id)
+VALUES (1, 'The best game i\'ve ever played', 5, 5, 13),
+       (2, 'Spent so much time playing this game and i think it was a waste of time, don\'t recommend playing this game', 1, 2, 1),
+       (3, 'it was so difficult to finish this game but eventually i managed to do it', 4, 9, 3),
+       (4, 'this game became boring for me after 5 hours of playing', 3, 14, 6),
+       (5, 'waste of money, almost the same as the previous version of this game', 3, 7, 3),
+       (6, 'i love this game, played a lot of times despite the fact that this game is so old', 5, 12, 8),
+       (7, 'bad game, don\'t really like it', 2, 15, 17),
+       (8, 'a good game to play with your friends in squads', 5, 4, 13),
+       (9, 'best battle royale i have ever played', 4, 3, 1),
+       (10, 'i\'m always playing this game with my friends, no doubts a really good game', 5, 11, 8);
+
+
+
 
 
