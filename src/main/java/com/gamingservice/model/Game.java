@@ -9,6 +9,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(of = "name")
@@ -41,6 +43,10 @@ public class Game {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> users = new HashSet<>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "game")
+    private List<Feedback> feedbacks = new LinkedList<>();
     
     public void addUser(User user) {
         users.add(user);
@@ -50,5 +56,15 @@ public class Game {
     public void removeUser(User user) {
         users.remove(user);
         user.getGames().remove(this);
+    }
+
+    public void addFeedback(Feedback feedback) {
+        feedbacks.add(feedback);
+        feedback.setGame(this);
+    }
+
+    public void removeFeedback(Feedback feedback) {
+        feedbacks.remove(feedback);
+        feedback.setGame(null);
     }
 }

@@ -1,5 +1,6 @@
 package com.gamingservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @EqualsAndHashCode(of = "email")
@@ -47,6 +50,10 @@ public class User {
     @ManyToMany(mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Set<Game> games = new HashSet<>();
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
+    private List<Feedback> feedbacks = new LinkedList<>();
+
     public void addGame(Game game) {
         games.add(game);
         game.getUsers().add(this);
@@ -55,6 +62,16 @@ public class User {
     public void removeGame(Game game) {
         games.remove(game);
         game.getUsers().remove(this);
+    }
+
+    public void addFeedback(Feedback feedback) {
+        feedbacks.add(feedback);
+        feedback.setUser(this);
+    }
+
+    public void removeFeedback(Feedback feedback) {
+        feedbacks.remove(feedback);
+        feedback.setUser(null);
     }
 
 }
