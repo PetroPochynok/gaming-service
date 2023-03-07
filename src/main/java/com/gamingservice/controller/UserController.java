@@ -3,7 +3,7 @@ package com.gamingservice.controller;
 import com.gamingservice.exception.EntityNotFoundException;
 import com.gamingservice.mapper.UserMapper;
 import com.gamingservice.model.User;
-import com.gamingservice.model.dto.UserAndUserProfileDTO;
+import com.gamingservice.model.dto.ExtendedUserDTO;
 import com.gamingservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,8 +34,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> saveUser(@RequestBody UserAndUserProfileDTO dto) {
-        User user = UserMapper.INSTANCE.UserAndUserProfileDtoToUser(dto);
+    public ResponseEntity<User> saveUser(@RequestBody ExtendedUserDTO dto) {
+        User user = UserMapper.INSTANCE.extendedUserDtoToUser(dto);
         userService.save(user);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody UserAndUserProfileDTO dto) {
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody ExtendedUserDTO dto) {
         User updatedUser = userService.update(dto, id);
         return ResponseEntity
                 .status(HttpStatus.OK)

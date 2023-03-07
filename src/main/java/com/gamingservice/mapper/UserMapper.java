@@ -2,7 +2,7 @@ package com.gamingservice.mapper;
 
 import com.gamingservice.model.User;
 import com.gamingservice.model.UserProfile;
-import com.gamingservice.model.dto.UserAndUserProfileDTO;
+import com.gamingservice.model.dto.ExtendedUserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    default User UserAndUserProfileDtoToUser(UserAndUserProfileDTO dto) {
+    default User extendedUserDtoToUser(ExtendedUserDTO dto) {
         User user = new User();
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());

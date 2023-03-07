@@ -1,7 +1,7 @@
 package com.gamingservice.service;
 
 import com.gamingservice.model.User;
-import com.gamingservice.model.dto.UserAndUserProfileDTO;
+import com.gamingservice.model.dto.ExtendedUserDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,7 +18,7 @@ public interface UserService {
 
     void save(User user);
 
-    User update(UserAndUserProfileDTO dto, Long id);
+    User update(ExtendedUserDTO dto, Long id);
 
 
     List<User> findAllFetchUserProfileAndGames();

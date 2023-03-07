@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class UserAndUserProfileDTO {
+public class ExtendedUserDTO {
 
     private Long id;
     private String firstName;

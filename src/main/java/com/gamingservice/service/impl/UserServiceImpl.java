@@ -5,7 +5,7 @@ import com.gamingservice.exception.NotEnoughMoneyException;
 import com.gamingservice.model.Game;
 import com.gamingservice.model.User;
 import com.gamingservice.model.UserProfile;
-import com.gamingservice.model.dto.UserAndUserProfileDTO;
+import com.gamingservice.model.dto.ExtendedUserDTO;
 import com.gamingservice.repository.GameRepository;
 import com.gamingservice.repository.UserRepository;
 import com.gamingservice.service.UserService;
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User update(UserAndUserProfileDTO dto, Long id) {
+    public User update(ExtendedUserDTO dto, Long id) {
         User user = userRepository.findByIdFetchUserProfileAndGames(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("There is no user with such id: %s", id)));
 
