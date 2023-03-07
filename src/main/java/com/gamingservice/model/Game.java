@@ -36,7 +36,7 @@ public class Game {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @JsonBackReference
+    @JsonBackReference("game_users")
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinTable(name = "user_game",
             joinColumns = @JoinColumn(name = "game_id"),
@@ -44,7 +44,7 @@ public class Game {
     )
     private Set<User> users = new HashSet<>();
 
-    @JsonBackReference
+    @JsonBackReference("game_feedbacks")
     @OneToMany(mappedBy = "game")
     private List<Feedback> feedbacks = new LinkedList<>();
     

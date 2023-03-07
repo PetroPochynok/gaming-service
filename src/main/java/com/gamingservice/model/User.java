@@ -51,7 +51,7 @@ public class User {
     private Set<Game> games = new HashSet<>();
 
     @JsonBackReference
-    @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     private List<Feedback> feedbacks = new LinkedList<>();
 
     public void addGame(Game game) {
