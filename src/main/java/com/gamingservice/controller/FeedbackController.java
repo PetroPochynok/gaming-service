@@ -26,7 +26,7 @@ public class FeedbackController {
 
     @GetMapping("/{id}")
     public Feedback getFeedback(@PathVariable("id") Long id) {
-        return feedbackService.findById(id)
+        return feedbackService.findByIdFetchGameAndUserWithUserProfileAndGames(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("There is no feedback with id: %s", id)));
     }
 

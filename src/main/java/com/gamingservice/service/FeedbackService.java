@@ -25,4 +25,6 @@ public interface FeedbackService {
     List<Feedback> findAllFeedbacksOfOneGameById(Long id);
 
     Double getAverageRatingOfGameById(Long id);
+
+    Optional<Feedback> findByIdFetchGameAndUserWithUserProfileAndGames(Long id);
 }

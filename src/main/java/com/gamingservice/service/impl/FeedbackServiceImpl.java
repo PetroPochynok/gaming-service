@@ -122,4 +122,9 @@ public class FeedbackServiceImpl implements FeedbackService {
         }
         throw new EntityNotFoundException("this game is not rated yet");
     }
+
+    @Override
+    public Optional<Feedback> findByIdFetchGameAndUserWithUserProfileAndGames(Long id) {
+        return feedbackRepository.findByIdFetchGameAndUserWithUserProfileAndGames(id);
+    }
 }
