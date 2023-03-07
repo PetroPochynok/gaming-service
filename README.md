@@ -24,5 +24,7 @@ There are 4 entities in the project: **User**, **UserProfile**, **Game** and **F
 
 ## Example of using Postman:
 <img src="https://i.imgur.com/OGLsjAe.png"/>
+<hr />
 <img src="https://i.imgur.com/2irarEm.png"/>
+<hr />
 <img src="https://i.imgur.com/5vNzAMA.png"/>
