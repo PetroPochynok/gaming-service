@@ -19,4 +19,12 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     @Transactional(readOnly = true)
     @Query("select f from Feedback f join fetch f.game join fetch f.user u join fetch u.userProfile where f.user.id=:userId")
     List<Feedback> findAllUserFeedbacksByIdFetchGameAndUser(@Param("userId") Long id);
+
+    @Transactional(readOnly = true)
+    @Query("select f from Feedback f where f.game.id=:gameId")
+    List<Feedback> findAllFeedbacksOfOneGameById(@Param("gameId") Long id);
+
+    @Transactional(readOnly = true)
+    @Query("select AVG(f.rating) from Feedback f where f.game.id=:gameId")
+    Double getAverageRatingOfGameById(@Param("gameId") Long id);
 }

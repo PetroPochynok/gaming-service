@@ -1,7 +1,9 @@
 package com.gamingservice.controller;
 
 import com.gamingservice.exception.EntityNotFoundException;
+import com.gamingservice.model.Feedback;
 import com.gamingservice.model.Game;
+import com.gamingservice.service.FeedbackService;
 import com.gamingservice.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,9 @@ public class GameController {
 
     @Autowired
     private GameService gameService;
+
+    @Autowired
+    private FeedbackService feedbackService;
 
     // CRUD operations
     @GetMapping
@@ -93,5 +98,17 @@ public class GameController {
     @GetMapping("/splitByGenre")
     public Map<String, List<Game>> splitAllGamesByGenre() {
         return gameService.splitAllGamesByGenre();
+    }
+
+    @GetMapping("/{id}/feedbacks")
+    public List<Feedback> getFeedbackAboutGame(@PathVariable("id") Long id) {
+        return feedbackService.findAllFeedbacksOfOneGameById(id);
+    }
+
+    @GetMapping("/{id}/averageRating")
+    public String getAverageRatingAboutGame(@PathVariable("id") Long id) {
+        Double rating = feedbackService.getAverageRatingOfGameById(id);
+
+        return String.format("The average rating of this game is: %1.2f", rating);
     }
 }

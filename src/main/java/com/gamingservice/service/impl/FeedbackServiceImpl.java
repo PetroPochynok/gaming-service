@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -102,5 +103,23 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<Feedback> findAllUserFeedbacksByIdFetchGameAndUser(Long userId) {
         return feedbackRepository.findAllUserFeedbacksByIdFetchGameAndUser(userId);
+    }
+
+    @Override
+    public List<Feedback> findAllFeedbacksOfOneGameById(Long id) {
+        List<Feedback> list = feedbackRepository.findAllFeedbacksOfOneGameById(id);
+        if (!list.isEmpty()) {
+            return list;
+        }
+        throw new EntityNotFoundException("this game hasn't got any feedbacks yet");
+    }
+
+    @Override
+    public Double getAverageRatingOfGameById(Long id) {
+        Double rating = feedbackRepository.getAverageRatingOfGameById(id);
+        if (!Objects.isNull(rating)) {
+            return rating;
+        }
+        throw new EntityNotFoundException("this game is not rated yet");
     }
 }
